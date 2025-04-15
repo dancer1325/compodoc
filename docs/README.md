@@ -1,8 +1,12 @@
-# Compodoc architecture and operating
+# Compodoc
 
-## Libraries used inside generate static HTML pages
+* goal
+  * architecture
+  * how does it work?
 
-### Libs not sync with npm
+## libraries / INTERNALLY -- use to generate -- static HTML pages
+
+### libs / NOT sync -- with -- npm
 
 -   d3 from d3-flextree: 3.x.x
 -   EventDispatcher
@@ -12,7 +16,7 @@
 -   promise
 -   deep-iterator: 2.4.0
 
-### Libs sync with npm
+### libs / sync -- with -- npm
 
 -   bootstrap native: 5.0.0
 -   es6-shim: 0.35.1
@@ -23,97 +27,57 @@
 
 ## Entry files
 
-If you are using Compodoc in module mode with a JavaScript file, `require('@compodoc/compodoc')`, the first entry file is `src/index.ts`.
+* if you are using Compodoc
+  * | module mode, `require('@compodoc/compodoc')`, -> `src/index.ts` == FIRST entry file 
+  * -- via -- CLI, -> `src/index-cli.ts` == FIRST entry file 
 
-If you are using Compodoc with the CLI, the first entry file is `src/index-cli.ts`.
+## How does Compodoc work?
 
-## Process
+- handle CLI flags
+- find files to scan -- via -- 
+  - `tsconfig.json`'s include and/or exclude options, OR
+  - root folder of `tsconfig.json`
+- scan the files -- via -- TypeScript compiler
+- generate ALL internal stuff
+- emit files / EACH category (modules, components, etc)
+- generation's result -- is -- echo
 
-The process of Compodoc is:
-
--   handle CLI flags
--   find files to scan using `tsconfig.json` include and/or exclude options, or use the root folder of `tsconfig.json`
--   scan the files using TypeScript compiler
--   generate all the internal stuff
--   emit files for each category (modules, components, etc)
--   echo the result of the generation.
-
-## Testing
-
-Unit testing is done by running several documentation generation with many different files and projects.
-
-E2E testing is done with SauceLabs service.
+## How to test?
 
 ### Local unit testing
+
+* == FROM SEVERAL files & projects, -- run -- SEVERAL documentation generation 
 
 ```shell
 npm run test
 ```
 
-### Local E2E
+### Local E2E testing
 
-1. Install [selenium-standalone](https://www.npmjs.com/package/selenium-standalone):
+* -- via -- SauceLabs service
 
-    ```shell
-    npm install selenium-standalone@latest -g
-    ```
+1. `npm install selenium-standalone@latest -g`
+   1. [selenium-standalone](https://www.npmjs.com/package/selenium-standalone):
+2. `selenium-standalone install`
+   1. == configure `selenium-standalone`:
+3. `selenium-standalone start`
+4. `npm run test:simple-doc`
+   1. == start LOCAL documentation generation | ANOTHER terminal tab
+5. `npm run local-test-e2e-mocha`
+   1. run local E2E testing
 
-2. Configure `selenium-standalone`:
+## How to setup development?
 
-    ```shell
-    selenium-standalone install
-    ```
-
-3. Start `selenium-standalone`:
-
-    ```shell
-    selenium-standalone start
-    ```
-
-4. Start local documentation generation in another terminal tab:
-
-    ```shell
-    npm run test:simple-doc
-    ```
-
-5. Start local E2E testing:
-
-    ```shell
-    npm run local-test-e2e-mocha
-    ```
-
-## Development setup
-
-1. Install
-
-    ```shell
-    npm i
-    ```
-
-2. Init
-
-    ```shell
-    npm run build
-    ```
-
-3. Link
-
-    ```shell
-    npm link
-    ```
-
-    This will make `compodoc` command available everywhere.
-
-4. Start
-
-    ```shell
-    npm start
-    ```
-
-    Launch watch process for source files and rollup build.
+1. `npm i`
+2. `npm run build`
+3. `npm link`
+   1. == 👀make `compodoc` command AVAILABLE EVERYWHERE 👀
+4. `npm start`
+   1. == watch process -- for -- source files & rollup build
 
 ## Node.js inspecting
 
+* TODO:
 1. Install sleep package:
 
     ```shell
