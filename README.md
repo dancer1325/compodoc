@@ -47,7 +47,7 @@
 # Documentation
 
 * [here](https://github.com/dancer1325/compodoc-website)
-* [demo](https://github.com/dancer1325/compodoc-website/blob/develop/src/docs/demo.md)
+* [here](docs)
 
 [license]: https://github.com/compodoc/compodoc/blob/master/LICENSE
 [vincent ogloblinsky]: https://www.vincentogloblinsky.com
